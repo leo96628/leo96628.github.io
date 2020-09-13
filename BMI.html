@@ -5,20 +5,56 @@
   <!-- 行動裝置支援 -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <title>BMI計算器</title>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<style>
+.form-group{
+  padding-left: 60px;
+  padding-top: 20px;
+}
+.button-box{
+  padding-left: 60px;
+  padding-top: 10px;
+}
+
+</style>
+<script>
+  $(function(){
+  $('#calc').click(function(){
+    var h=$('#height').val();
+    var w=$('#weight').val();
+    var bmi = w/(h*h);
+
+    if(h==''){
+      alert('請輸入身高(m)');
+    } else if(w==''){
+      alert('請輸入體重(kg)');
+    }else if(h<1){
+      alert('提利昂是你?');
+    }else{
+      $('#result').val(formatFloat(bmi,2));
+      $('#height').val('');
+      $('#weight').val('');
+    }
+
+  });
+});
+function formatFloat(num, pos) {
+  var size = Math.pow(10, pos);
+  return Math.round(num * size) / size;
+}
+
+</script>
 
 </head>
 <body>
-
-<div class="countainer-fluid my countainer">
+<div class="countainer-fluid my-countainer">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
       <div class="row">
-        <div class="col-md-4"></div>
         <div class="col-md-4"></div>
         <div class="col-md-4"></div>
       </div>
@@ -33,11 +69,36 @@
         <a class="nav-link" href="#">Fit小知識 <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="https://www.cakeresume.com/b02101048" target="_blank">About</a>
       </li>
     </ul>
 </div>
 </nav>
+
+<div class="row">
+  <div class="col-md3 box">
+    <div class="form-group">
+      <label for="height">身高</label>
+      <input type="number" class="form-control" id="height" aria-describedby="heightHelp">
+      <small id="heightHelp" class="form-text text-muted">單位：m</small>
+ </div>
+ <div class="col-md3 button-box">
+   <button id="calc" class="btn btn-secondary" type="submit">勇敢計算</button>
+ </div>
+   <div class="col-md3 button-box">
+     <label for="cons">結果出爐</label>
+      <input type="number" class="form-control" id="result" readonly="true">
+   </div>
+  </div>
+  <div class="col-md3 box">
+        <div class="form-group">
+        <label for="weight">體重</label>
+        <input type="number" class="form-control" id="weight" aria-describedby="weightHelp">
+        <small id="weightHelp" class="form-text text-muted">單位：kg</small>
+  </div>
+
+
+</div>
 </div>
 </body>
 </html>
